@@ -1,0 +1,13 @@
+type Account @entity {
+  id: ID! # {accountAddress}
+  balances: [Balance!]! @derivedFrom(field: "account")
+}
+
+type Balance @entity {
+  id: ID! # {accountAddress}|{tokenAddress}
+  account: Account!
+  token: String!
+  balance: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}

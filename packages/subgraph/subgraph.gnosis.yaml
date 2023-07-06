@@ -1,0 +1,48 @@
+specVersion: 0.0.4
+features:
+  - nonFatalErrors
+schema:
+  file: ./schema.graphql
+dataSources:
+  - name: Swapr
+    kind: ethereum/contract
+    network: gnosis
+    source:
+      address: "0x532801ed6f82fffd2dab70a19fc2d7b2772c4f4b"
+      startBlock: 18446680
+      abi: ERC20
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: ./src/mappings/ERC20.ts
+      entities:
+        - Account
+        - Balance
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+  - name: COW
+    kind: ethereum/contract
+    network: gnosis
+    source:
+      address: "0x177127622c4a00f3d409b75571e12cb3c8973d3c"
+      startBlock: 20588746
+      abi: ERC20
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: ./src/mappings/ERC20.ts
+      entities:
+        - Account
+        - Balance
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer

@@ -1,0 +1,6 @@
+bin
+node_modules
+.env
+subgraph.yaml
+generated
+build
